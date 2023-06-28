@@ -62,11 +62,12 @@ class BigMonster extends Character {
 
 //EL = Element
 class Stage {
-    constructor(fighter1, fighter2, fighter1El, fighter2El) {
+    constructor(fighter1, fighter2, fighter1El, fighter2El, logObject) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
         this.fighter1El = fighter1El;
         this.fighter2El = fighter2El;
+        this.log = logObject;
     }
 
     start() {
@@ -91,8 +92,11 @@ class Stage {
     }
 
     doAttack(player, target) {
-        if (player.life <= 0 || target.life <= 0) {
-            console.log('Tu morreu ou matou.');
+        if (player.life <= 0) {
+            this.log.addMessage('😭 Tu morreu seu noob não pode atacar!');
+            return; //para o ataque
+        } if (target.life <= 0) {
+            this.log.addMessage('⚰️ Foi de Americanas!');
             return; //para o ataque
         }
 
@@ -104,10 +108,31 @@ class Stage {
 
         if (actualAttack > actualDefense) {
             target.life -= actualAttack;
-            console.log(`${player.name} causou ${actualAttack.toFixed(2)} de dano em ${target.name}`)
+            this.log.addMessage(`⚔️ ${player.name} causou ${actualAttack.toFixed(2)} de dano em ${target.name}`)
         } else {
-            console.log(`${target.name} desviou do ataque de ${player.name}!`)
+            this.log.addMessage(`🛡️ ${target.name} desviou do ataque de ${player.name}!`)
         }
         this.update() //atualiza o ambiente (vida, etc)
+    }
+}
+
+class Log {
+    list = [];
+
+    constructor(listEl) {
+        this.listEl = listEl;
+    }
+
+    addMessage(msg) {
+        this.list.push(msg); //add msg no array
+        this.render(); //renderiza o log toda vez que tiver algo novo, tira tudo e atualiza.
+    }
+
+    render() {
+        this.listEl.innerHTML = ''; //limpa a lista antiga
+
+        for (let i in this.list) { //percorre a lista e preenche os LIs
+            this.listEl.innerHTML += `<li>${this.list[i]}</li>`;
+        }
     }
 }

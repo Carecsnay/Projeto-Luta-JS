@@ -21,6 +21,14 @@
 
 .log {
     border: 1px dotted #999;
-    height: 200px;
     overflow-y: scroll;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    
+    width: 400px;
+    height: 200px;
+    
+    list-style: none;
 }
