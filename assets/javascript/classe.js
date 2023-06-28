@@ -2,20 +2,21 @@
 // LittleMonster ou BigMonster
 
 class Character {
-    life = 1;
+    _life = 1;
     maxLife = 1;
     attack = 0;
     defense = 0;
+
     constructor(name) {
         this.name = name;
     }
 
-    getLife() {
-        return this.life;
+    get life() {
+        return this._life;
     }
 
-    setLife(newLife) {
-        this.life = newLife < 0 ? 0 : newLife;
+    set life(newLife) {
+        this._life = newLife < 0 ? 0 : newLife;
     }
 }
 
@@ -84,12 +85,29 @@ class Stage {
         this.fighter1El.querySelector('.bar').style.width = `${f1Pct}%`
 
         //Fighter 2
-    this.fighter2El.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter2.life} de HP`;
+        this.fighter2El.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter2.life} de HP`;
         let f2Pct = (this.fighter2.life / this.fighter2.maxLife) * 100;
         this.fighter2El.querySelector('.bar').style.width = `${f2Pct}%`
     }
 
     doAttack(player, target) {
-        console.log(`${player.name} está atacando ${target.name}`)
+        if (player.life <= 0 || target.life <= 0) {
+            console.log('Tu morreu ou matou.');
+            return; //para o ataque
+        }
+
+        let attackFactor = (Math.random() * 2).toFixed(2); //ataque aleatório máximo pode duplicar o dano
+        let defenseFactor = (Math.random() * 2).toFixed(2); //defesa aleatório máximo pode duplicar a defesa 
+
+        let actualAttack = attackFactor * player.attack;
+        let actualDefense = defenseFactor * target.defense;
+
+        if (actualAttack > actualDefense) {
+            target.life -= actualAttack;
+            console.log(`${player.name} causou ${actualAttack.toFixed(2)} de dano em ${target.name}`)
+        } else {
+            console.log(`${target.name} desviou do ataque de ${player.name}!`)
+        }
+        this.update() //atualiza o ambiente (vida, etc)
     }
 }
