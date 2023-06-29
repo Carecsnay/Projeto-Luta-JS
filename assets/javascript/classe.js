@@ -121,6 +121,9 @@ class Log {
 
     constructor(listEl) {
         this.listEl = listEl;
+        this.listEl.addEventListener('DOMNodeInserted', () => {
+            this.listEl.scrollTop = this.listEl.scrollHeight;
+        });
     }
 
     addMessage(msg) {
