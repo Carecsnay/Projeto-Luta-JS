@@ -1,5 +1,5 @@
 let log = new Log(document.querySelector('.log'));
-let char = new Knight('Iuzer');
+let char = new Sorcerer('(Sacerdote) Marcelo Rossi');
 let monster = new BigMonster();
 
 const stage = new Stage(
@@ -10,4 +10,4 @@ const stage = new Stage(
     log //stage vai preencher o log
 );
 
-stage.start();
+stage.start();  

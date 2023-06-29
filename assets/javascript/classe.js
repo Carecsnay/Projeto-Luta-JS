@@ -33,7 +33,7 @@ class Knight extends Character {
 class Sorcerer extends Character {
     constructor(name) {
         super(name);
-        this.life = 80;
+        this.life = 800;
         this.attack = 15;
         this.defense = 3;
         this.maxLife = this.life;
@@ -52,7 +52,7 @@ class LittleMonster extends Character {
 
 class BigMonster extends Character {
     constructor() {
-        super('Big Monster')
+        super('Pecadora')
         this.life = 120;
         this.attack = 16;
         this.defense = 6;
@@ -93,10 +93,10 @@ class Stage {
 
     doAttack(player, target) {
         if (player.life <= 0) {
-            this.log.addMessage('😭 Tu morreu seu noob não pode atacar!');
+            this.log.addMessage(`😭 ${player.name} tá morta praga ruim!`);
             return; //para o ataque
         } if (target.life <= 0) {
-            this.log.addMessage('⚰️ Foi de Americanas!');
+            this.log.addMessage(`⚰️ ${target.name} foi de base!`);
             return; //para o ataque
         }
 
