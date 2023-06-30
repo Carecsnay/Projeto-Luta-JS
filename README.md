@@ -8,9 +8,9 @@
 
 <p align="center">
   <h3 align="center">Video Demonstrativo 😂&nbsp</h3>
+  
 
-
-https://github.com/Carecsnay/Projeto-Luta-JS/assets/53373326/c507486a-2efd-4ebb-ac35-ec90720ecdd2
+https://github.com/Carecsnay/Projeto-Luta-JS/assets/53373326/1120bacb-b3cd-4995-961e-1141d2854820
 
 
 </p>
